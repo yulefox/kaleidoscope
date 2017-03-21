@@ -1,3 +1,10 @@
+# Temp files
+*.swo
+*.swp
+
+# Mac
+.DS_Store
+
 # Object files
 *.o
 *.ko
@@ -32,5 +39,3 @@
 *.dSYM/
 *.su
 
-# Mac
-.DS_Store
