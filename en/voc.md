@@ -1,0 +1,5 @@
+# S
+
+- sole
+
+single, unique
