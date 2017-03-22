@@ -4,17 +4,27 @@ LIBDIR=${PREFIX}/lib
 INCDIR=${PREFIX}/include
 
 CFLAGS+=-g -Wall -O2 -DDEBUG -fPIC
+LIBS=
 AR=ar
 AR_FLAGS=rc
 RANLIB=ranlib
 
-all: test
+all: libhttp test test-restful-server
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
-test: test.o mongoose.o
-	$(CC) -o $@ $^
+libhttp: libhttp.a
+
+libhttp.a: http.o mongoose.o
+	$(AR) $(AR_FLAGS) $@ $^
+	$(RANLIB) $@
+
+test-restful-server: restful_server.o libhttp.a
+	$(CC) -o $@ $^ $(LIBS)
+
+test: test.o mongoose.o libhttp.a
+	$(CC) -o $@ $^ $(LIBS)
 
 clean:
 	rm -rf test-* *.dSYM *.o
