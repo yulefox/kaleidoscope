@@ -13,10 +13,14 @@ all: lib test
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
-lib:
+lib: libnsqex.a
 
-libnsq.a: command.o reader.o nsqd_connection.o http.o message.o nsqlookupd.o json.o
-	$(AR) $(AR_FLAGS) $@ $^
+libnsqex.a:
+	$(AR) x /usr/local/lib/libev.a
+	$(AR) x /usr/local/lib/libevbuffsock.a
+	$(AR) x /usr/local/lib/libjson-c.a
+	$(AR) x /usr/local/lib/libnsq.a
+	$(AR) $(AR_FLAGS) $@ *.o
 	$(RANLIB) $@
 
 test: test-hello
@@ -25,7 +29,8 @@ test-nsqd.o: test.c
 	$(CC) -o $@ -c $< $(CFLAGS) -DNSQD_STANDALONE
 
 test-hello: test.o 
-	$(CC) -o $@ $^ -lev -levbuffsock -ljson-c -lcurl -lnsq
+	#$(CC) -o $@ $^ -Wl,-Bdynamic -lev -Wl,-Bstatic -levbuffsock -Wl,-Bdynamic -ljson-c -Wl,-Bstatic -lnsq -Wl,-Bdynamic -lcurl 
+	$(CC) -o $@ $^ -lcurl -lm -lnsqex
 
 clean:
 	rm -rf lib*.a test-* *.dSYM *.o
@@ -33,7 +38,4 @@ clean:
 .PHONY: install clean all test
 
 install:
-#	install -m 755 -d ${DESTDIR}${INCDIR}
-#	install -m 755 -d ${DESTDIR}${LIBDIR}
-#	install -m 755 libnsq.a ${DESTDIR}${LIBDIR}/libnsq.a
-#	install -m 755 nsq.h ${DESTDIR}${INCDIR}/nsq.h
+	install -m 755 libnsqex.a ${DESTDIR}${LIBDIR}/libnsqex.a
