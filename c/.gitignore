@@ -1,1 +1,9 @@
+c/libnsq
 libev-4.24/
+libev/hello
+nsq/hello
+nsq/hello2
+nsq/libnsq
+nsq/test-hello
+test-mongoose/test
+test-mongoose/test-restful-server

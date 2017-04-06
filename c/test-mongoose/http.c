@@ -9,7 +9,13 @@ static struct mg_serve_http_opts s_http_server_opts;
 
 static void handle_cmd(struct mg_connection *nc, struct http_message *hm)
 {
-  const struct mg_str *cmd = &hm->query_string;
+  const struct mg_str *cmd = NULL;
+
+  if (mg_vcasecmp(&hm->method, "GET") == 0) {
+    cmd = &hm->query_string;
+  } else if (mg_vcasecmp(&hm->method, "POST") == 0) {
+    cmd = &hm->body;
+  }
 
   mg_printf(nc, "%s", "HTTP/1.1 200 OK\nTransfer-Encoding: chunked\n\n");
   mg_printf_http_chunk(nc, "{ \"cmd\": \"%.*s\" }", cmd->len, cmd->p);
