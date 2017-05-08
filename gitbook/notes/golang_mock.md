@@ -21,7 +21,7 @@ type MyInterface interface {
 2) 使用 mockgen 为接口生成 mock:
 
 ```sh
-    mockgen sample/something MyInterface \
+mockgen sample/something MyInterface \
   > sample/mock_something/mock_something.go
 ```
 
