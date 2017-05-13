@@ -19,5 +19,3 @@
    - [張潮-幽夢影](essays/04_17_張潮_幽夢影.md)
    - [曹雪芹-紅樓夢](essays/04_17_曹雪芹_紅樓夢.md)
    - [袁枚-隨園詩話](essays/04_17_袁枚_隨園詩話.md)
-   - [科技公司的未来](essays/2017_think_tech.md)
-   - [TODO](essays/2017_todo.md)
