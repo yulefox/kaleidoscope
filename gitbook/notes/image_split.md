@@ -1,4 +1,4 @@
-## Tesseract
+# Tesseract
 
 ## Pillow/PIL
 
