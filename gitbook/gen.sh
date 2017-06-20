@@ -18,17 +18,17 @@ rm -rf _book
 while getopts "abc" opt ; do
     case $opt in
         a)
-            gitbook-gen --exclusions _book,node_modules --show-all . \
+            gitbook-gen --exclusions _book,assets,node_modules --show-all . \
                 > SUMMARY.md
             echo "Generate all, OK"
             ;;
         b)
-            gitbook-gen --exclusions _book,node_modules,notes --show-all . \
+            gitbook-gen --exclusions _book,assets,node_modules,notes --show-all . \
                 > SUMMARY.md
             echo "Generate essays, OK"
             ;;
         c)
-            gitbook-gen --exclusions _book,node_modules,arts,essays --show-all . \
+            gitbook-gen --exclusions _book,assets,node_modules,arts,essays --show-all . \
                 > SUMMARY.md
             echo "Generate notes, OK"
             ;;

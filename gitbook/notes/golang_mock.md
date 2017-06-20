@@ -1,4 +1,4 @@
-## mock
+# Golang mock
 
 模拟环境, 下文直接使用 *mock*.
 
