@@ -1,29 +1,4 @@
-## CLI
-
-通过 CLI 整合子命令, 将 Lamp 打造成一个完整生态.
-
-- `dashboard` 后台仪表盘
-
-- `spanner` 扳手: 发送命令
-
-- `log` 各种日志
-
-## 流程
-
-- 生产者发布消息
-
-常见的生产者应用场景: 用户通过浏览器从前端投递消息(Node.js).
-
-```sh
-curl -l -H "Content-type: application/json" -X POST -d '{"event":"EVENT_ITEM_ADD","arg_a":501001,"arg_b":10000,"arg_64":$long_id,"arg_str":""}' http://yulefox.com:4151/pub?topic=gm
-```
-
-消息经 `nsqd` 发布, 等待消费者处理.
-
-- 消费者处理消息 
-
-  - NSQ 客户端接收并处理消息, 转发给游戏服务进行逻辑处理.
-  - 生产者等待处理结果, 需要借助 `channel` 实现.
+# App
 
 ## 资源爬取
 
@@ -70,7 +45,19 @@ curl -l -H "Content-type: application/json" -X POST -d '{"event":"EVENT_ITEM_ADD
 
 ## 圖片資源命名規範
 
+- ID
+
+呈現給終端的 ID 需要重 hash, 路徑不分層, 避免被有組織的盜用.
+
+  - 作者 ID
+
+  - 作品 ID
+
+  - 圖片 ID
+
 - 作者信息
+
+  - 作者 ID
 
   - 作者名稱
 
@@ -96,6 +83,10 @@ curl -l -H "Content-type: application/json" -X POST -d '{"event":"EVENT_ITEM_ADD
 
 - 作品信息
 
+  - 作品 ID
+
+  - 作者 ID
+
   - 名稱
 
 作品的慣用名稱.
@@ -114,4 +105,60 @@ curl -l -H "Content-type: application/json" -X POST -d '{"event":"EVENT_ITEM_ADD
 
 - 單字信息
 
+  - 图片 ID
+
+  - 作品 ID
+
+  - 单字 ID
+
+  - 名稱
+
+  - 前驱
+
+  - 后继
+
+  - 簡介
+
+## 互动
+
+互动信息, 关联到作品 ID, 图片 ID.
+
+## 后台 API
+
+
+### 写入
+
+- 文字
+
+文字信息的录入, 可以一次录入大量信息
+
+  - 朝代信息
+
+  - 作者信息
+
+  - 作品信息
+
+  - 文章信息
+
+  - 其他文字
+
+- 图片
+
+图片存储在文件系统中, 图片路径存储在数据库中
+
+  - 作品图片
+
+  - 作者图片
+
+  - 其他图片
+
+只允许写入收入作品名录的作品图片, 未收录者, 需要先填写作者信息, 作品信息等
+
+### 识别
+
+- 图片
+
+  - 图片分割
+
+  - 释文对照
 
