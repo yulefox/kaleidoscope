@@ -3,8 +3,8 @@
 插件式服务注册发现.
 
 - 服务注册
-- 服务发现
 
+- 服务发现
 
 ```go
 func NewMaster(endpoints []string) {
